@@ -1,0 +1,31 @@
+{
+  "name": "@apis/hkp",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "start": "cervice",
+    "dev": "cervice --watch",
+    "dev:test": "node --test --test-reporter=spec --watch",
+    "test": "node --test --test-reporter=spec"
+  },
+  "author": "CERTIFICATUM SİBER GÜVENLİK TEKNOLOJİLERİ A.Ş.<iletisim@certificatum.com.tr>",
+  "license": "Certificatum Proprietary License",
+  "dependencies": {
+    "@cervice/core": "*",
+    "@cervice/cli": "*",
+    "@cervice/typeorm": "*",
+    "@cervice/express": "*",
+    "@cervice/schema": "*",
+    "@cervice/schema-ajv": "*"
+  },
+  "peerDependencies": {
+    "pg": "^8.16.3",
+    "typeorm": "^0.3.25",
+    "ajv": "^8.17.1"
+  },
+  "devDependencies": {
+    "eslint": "^9.29.0",
+    "standard": "^17.1.2"
+  }
+}
