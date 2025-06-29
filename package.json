@@ -13,7 +13,6 @@
   "license": "Certificatum Proprietary License",
   "dependencies": {
     "@cervice/core": "*",
-    "@cervice/cli": "*",
     "@cervice/typeorm": "*",
     "@cervice/express": "*",
     "@cervice/schema": "*",

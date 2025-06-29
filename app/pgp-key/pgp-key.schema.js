@@ -10,17 +10,25 @@ const HKPSchema = {
           description: "ASCII-armored PGP public key block"
         },
         mr: {
-          type: "boolean",
-          description: "Machine readable format response"
+          oneOf: [
+            { type: "boolean" },
+            { type: "string", enum: ["on", "off"] }
+          ],
+          description: "Machine readable format response (boolean or 'on'/'off')"
+        },
+        options: {
+          type: "string",
+          enum: ["mr"],
+          description: "Legacy HKP options parameter (use 'mr' for machine readable)"
         }
       }
     },
     output: {
       type: "object",
       properties: {
-        success: "boolean",
-        message: "string",
-        keyid: "string"
+        success: { type: "boolean" },
+        message: { type: "string" },
+        keyid: { type: "string" }
       }
     }
   },
@@ -42,16 +50,30 @@ const HKPSchema = {
           description: "Operation: get (return key data), index (return key info), vindex (verbose index)"
         },
         exact: {
-          type: "boolean",
-          description: "Exact match only"
+          oneOf: [
+            { type: "boolean" },
+            { type: "string", enum: ["on", "off"] }
+          ],
+          description: "Exact match only (boolean or 'on'/'off')"
         },
         fingerprint: {
-          type: "boolean",
-          description: "Show fingerprints in index operations"
+          oneOf: [
+            { type: "boolean" },
+            { type: "string", enum: ["on", "off"] }
+          ],
+          description: "Show fingerprints in index operations (boolean or 'on'/'off')"
         },
         mr: {
-          type: "boolean",
-          description: "Machine readable format response"
+          oneOf: [
+            { type: "boolean" },
+            { type: "string", enum: ["on", "off"] }
+          ],
+          description: "Machine readable format response (boolean or 'on'/'off')"
+        },
+        options: {
+          type: "string",
+          enum: ["mr"],
+          description: "Legacy HKP options parameter (use 'mr' for machine readable)"
         },
         // Advanced search filters
         algorithm: {
@@ -85,14 +107,20 @@ const HKPSchema = {
           description: "ISO 8601 datetime - keys expiring before this date"
         },
         include_revoked: {
-          type: "boolean",
+          oneOf: [
+            { type: "boolean" },
+            { type: "string", enum: ["on", "off"] }
+          ],
           default: false,
-          description: "Include revoked keys in results"
+          description: "Include revoked keys in results (boolean or 'on'/'off')"
         },
         include_expired: {
-          type: "boolean",
+          oneOf: [
+            { type: "boolean" },
+            { type: "string", enum: ["on", "off"] }
+          ],
           default: false,
-          description: "Include expired keys in results"
+          description: "Include expired keys in results (boolean or 'on'/'off')"
         },
         limit: {
           type: "number",
@@ -117,10 +145,10 @@ const HKPSchema = {
           items: {
             type: "object",
             properties: {
-              keyid: "string",
-              fingerprint: "string",
-              algorithm: "string",
-              keysize: "number",
+              keyid: { type: "string" },
+              fingerprint: { type: "string" },
+              algorithm: { type: "string" },
+              keysize: { type: "number" },
               creation_date: {
                 type: "string",
                 format: "date-time",
@@ -141,7 +169,9 @@ const HKPSchema = {
               },
               uids: {
                 type: "array",
-                items: "string",
+                items: {
+                  type: "string"
+                },
                 description: "User IDs associated with this key"
               },
               keydata: {
@@ -151,9 +181,9 @@ const HKPSchema = {
             }
           }
         },
-        total: "number",
-        offset: "number",
-        limit: "number"
+        total: { type: "number" },
+        offset: { type: "number" },
+        limit: { type: "number" }
       }
     }
   },
@@ -178,8 +208,8 @@ const HKPSchema = {
     output: {
       type: "object",
       properties: {
-        success: "boolean",
-        message: "string"
+        success: { type: "boolean" },
+        message: { type: "string" }
       }
     }
   }
