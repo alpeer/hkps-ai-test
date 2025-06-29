@@ -1,3 +1,4 @@
+import logger from "./lib/logger.js"
 import pkg from "./package.json" with {type: "json"}
 
 export default {
@@ -12,6 +13,7 @@ export default {
   middlewares: [ // S.A.F.E. middlewares eg. async (input, ctx)=>
 
   ],
+  logger,
   express: {
     port: 3000 //process.env.APP_PORT
     // middlewares: [
