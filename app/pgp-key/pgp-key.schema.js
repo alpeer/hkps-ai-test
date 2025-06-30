@@ -138,53 +138,62 @@ const HKPSchema = {
       }
     },
     output: {
-      type: "object",
-      properties: {
-        keys: {
-          type: "array",
-          items: {
-            type: "object",
-            properties: {
-              keyid: { type: "string" },
-              fingerprint: { type: "string" },
-              algorithm: { type: "string" },
-              keysize: { type: "number" },
-              creation_date: {
-                type: "string",
-                format: "date-time",
-                description: "ISO 8601 datetime when key was created"
-              },
-              expiration_date: {
-                type: "string",
-                format: "date-time",
-                description: "ISO 8601 datetime when key expires (null if no expiration)"
-              },
-              revoked: {
-                type: "boolean",
-                description: "True if key has been revoked"
-              },
-              expired: {
-                type: "boolean",
-                description: "True if key has passed expiration date"
-              },
-              uids: {
-                type: "array",
-                items: {
-                  type: "string"
-                },
-                description: "User IDs associated with this key"
-              },
-              keydata: {
-                type: "string",
-                description: "ASCII-armored key data (only present when op=get)"
-              }
-            }
-          }
+      oneOf: [
+        {
+          "description": "Machine-readable plain text output. This format is returned when the 'mr' parameter is true. The specific content depends on the 'op' parameter ('get', 'index', or 'vindex').",
+          "type": "string",
+          // "example": "info:1:1\npub:24E1B3B76E23258D:1:2048:1640995200::\nuid:Example%20User%20%3Cuser%40example.com%3E:1640995200::"
         },
-        total: { type: "number" },
-        offset: { type: "number" },
-        limit: { type: "number" }
-      }
+        {
+          type: "object",
+          properties: {
+            keys: {
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  keyid: { type: "string" },
+                  fingerprint: { type: "string" },
+                  algorithm: { type: "string" },
+                  keysize: { type: "number" },
+                  creation_date: {
+                    type: "string",
+                    format: "date-time",
+                    description: "ISO 8601 datetime when key was created"
+                  },
+                  expiration_date: {
+                    type: "string",
+                    format: "date-time",
+                    description: "ISO 8601 datetime when key expires (null if no expiration)"
+                  },
+                  revoked: {
+                    type: "boolean",
+                    description: "True if key has been revoked"
+                  },
+                  expired: {
+                    type: "boolean",
+                    description: "True if key has passed expiration date"
+                  },
+                  uids: {
+                    type: "array",
+                    items: {
+                      type: "string"
+                    },
+                    description: "User IDs associated with this key"
+                  },
+                  keydata: {
+                    type: "string",
+                    description: "ASCII-armored key data (only present when op=get)"
+                  }
+                }
+              }
+            },
+            total: { type: "number" },
+            offset: { type: "number" },
+            limit: { type: "number" }
+          }
+        }
+      ]
     }
   },
 

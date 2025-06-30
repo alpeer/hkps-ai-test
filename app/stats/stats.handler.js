@@ -24,7 +24,7 @@ const StatsHandlers = ({ KeyUserId, PGPSubkey, PGPKey, KeyStats }) => ({
 
       algorithmStats.forEach(stat => {
         const algo = stat.algorithm.toLowerCase()
-        if (algorithmCounts.hasOwnProperty(algo)) {
+        if (Object.prototype.hasOwnProperty.call(algorithmCounts, algo)) {
           algorithmCounts[algo] = parseInt(stat.count)
         }
       })
